@@ -31,20 +31,17 @@
             <a class="nav-link" href="#"><i class="bi bi-person-circle"></i></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:settings' %}"><i class="bi bi-gear"></i></a>
+            <a class="nav-link" href="#"><i class="bi bi-gear"></i></a>
             </li>
             <li class="nav-item">
-            <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button class="nav-link" type="submit">Logout</button>
-            </form>
+            <a id="logoututton" class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
-            <a id="loginbutton" class="nav-link" href="{% url 'login' %}">Login</a>
+            <a id="loginbutton" class="nav-link" href="{% url 'accounts:login' %}">Login</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+            <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
             </li>
             {% endif %}
           </ul>
