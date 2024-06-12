@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron">
+  <h1>Welcome {{ user.username}}</h1>
+    <a href="{% url 'tutor:home'  %}" role="button" class="btn btn-outline-secondary w-120">Get Started</a>
+</div>
+
+
+{% endblock %}
