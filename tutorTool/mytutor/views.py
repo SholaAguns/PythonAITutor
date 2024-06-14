@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render
@@ -9,54 +10,50 @@ from .utils import get_gpt_response
 
 User = get_user_model()
 
-# class IndexPage(TemplateView):
-#     template_name = 'tutor_index.html'
 
-
+@login_required()
 def handle_request(request, pk):
     new_query = Query()
+    response = Response()
+    new_query.user = request.user
+
     if pk == 1:
         new_query.request = "schedule"
         subjects = request.POST.get('input')
-        prompt = f"Create a weekly study schedule for me including the following subjects: {subjects}"
+        new_query.input = f"Create a weekly study schedule for me including the following subjects: {subjects}"
     elif pk == 2:
         new_query.request = "motivation"
-        prompt = f"Give me some motivation to study with tough love"
+        new_query.input = f"Give me some motivation to study with tough love"
     elif pk == 3:
         new_query.request = "quiz"
         topic = request.POST.get('input')
-        prompt = f"Create a 15 question quiz based on the following topic: {topic}"
+        new_query.input = f"Create a 15 question quiz based on the following topic: {topic}"
     else:
         return render(request, 'mytutor/tutor_index.html')
 
-    response = Response()
-    response.query = new_query
-    response.text = get_gpt_response(prompt)
     new_query.save()
+
+    response.text = get_gpt_response(new_query.input)
+
+
+    response.query = Query.objects.get(id=new_query.id)
     response.save()
+
     return render(request, 'mytutor/response_detail.html', {'response' : response})
+
 
 class ResponseDetail(LoginRequiredMixin, generic.DetailView):
     model = Response
 
 
-class QueryList(generic.ListView):
-    model = Query
-    template_name = "notes/user_queries_list.html"
 
-    def get_queryset(self):
-        try:
-            self.query_user = User.objects.prefetch_related("queries").get(
-                username__iexact=self.kwargs.get("username")
-            )
-        except User.DoesNotExist:
-            raise Http404
-        else:
-            return self.query_user.queries.all()
+@login_required()
+def return_queries(request):
+    context = {}
+    context["queries"] = Query.objects.filter(user=request.user)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["query_user"] = self.query_user
-        return context
+    return render(request, 'mytutor/user_queries_list.html', context)
+
+
 
 

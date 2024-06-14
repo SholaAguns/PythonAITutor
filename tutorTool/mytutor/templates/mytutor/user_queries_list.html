@@ -5,8 +5,8 @@
 <br>
  <div align="center" class="container">
     <div class="col-md-8">
-	{% for query in query_list %}
-        <h4> {{ query.request }} </h4>
+	{% for query in queries %}
+        {{ query }} {{ query.id }} {{ query.response }}
 	{% endfor %}
     </div>
 
