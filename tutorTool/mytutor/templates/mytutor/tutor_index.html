@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br>
+ <div align="center" class="container" id="doc-form-wrapper">
+   <div class="jumbotron">
+    <h2>What would like me to help you with?</h2>
+    <button onclick="showInput('1')" class="btn btn-outline-secondary w-120">Create a study schedule</button>
+    <a href="{% url 'mytutor:user_request' pk=2  %}" role="button" class="btn btn-outline-secondary w-120">I NEED SOME MOTIVATION</a>
+    <button onclick="showInput('3')" class="btn btn-outline-secondary w-120">Create a quiz</button>
+   </div>
+   <div align="center" class="container">
+     <br><br><hr>
+     <form id="input_form" method="POST" style="display: none;">
+        {% csrf_token %}
+        <input type="text" id="input" name="input">
+        <button type="submit" class="btn btn-outline-secondary" id="submit_button">Submit</button>
+    </form>
+   </div>
+
+</div>
+    <script>
+        function showInput(pk) {
+            const form = document.getElementById('input_form');
+            const input = document.getElementById('input');
+            const submitButton = document.getElementById('submit_button');
+
+            form.style.display = 'block';
+            form.action = `${pk}`;
+
+            if (pk === '1') {
+                input.placeholder = 'What subjects would you like to include?';
+            } else if (pk === '3') {
+                input.placeholder = 'Sure, give me a topic';
+            }
+        }
+
+        //function directSubmit(buttonType) {
+         //   window.location.href = `/submit/${pk}/`;
+        //}
+    </script>
+{% endblock %}

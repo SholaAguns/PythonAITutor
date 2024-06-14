@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br>
+ <div align="center" class="container">
+    <div class="col-md-8">
+	{% for query in query_list %}
+        <h4> {{ query.request }} </h4>
+	{% endfor %}
+    </div>
+
+
+</div>
+{% endblock %}
