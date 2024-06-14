@@ -4,13 +4,13 @@ from openai import OpenAI
 
 def get_gpt_response(prompt):
     client = OpenAI(
-        api_key = "<your key>",
+        api_key = "<your_key_here>",
     )
 
     response = client.chat.completions.create(
       model = "gpt-3.5-turbo",
       messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "You are a helpful study assistant."},
         {"role": "user", "content": prompt},
       ]
     )

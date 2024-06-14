@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-75akbjlp!%ra5oi41)hcmnug0fv#8c_nug8s7%n3h6193ms62(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    'bootstrap4',
     'accounts',
     'mytutor'
 ]

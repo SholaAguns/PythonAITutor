@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 <html>
 <head>
 <meta charset="utf-8" />
@@ -15,20 +15,32 @@
     <!--        Custom CSS styling -->
    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
 
+   <!--        Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+  <!--        Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
  </head>
 <body class="base_body">
 
   <header class="header_section">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg custom_nav-container">
-      <button id="navbar_burger_icon" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span  class="navbar-toggler-icon"></span>
-      </button>
+        <ul class="navbar-nav mr-auto">
+          <a class="navbar-brand mynav" id="brandname" href="{% url 'home' %}">TutorTool</a>
+        </ul>
 
           <ul class="navbar-nav ms-auto">
             {% if user.is_authenticated %}
+
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'mytutor:queries' %}">My Requests</a>
+            <a class="nav-link" href="{% url 'mytutor:user_request' pk=0  %}">New Request </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'mytutor:requests' %}">My Requests</a>
             </li>
             <li class="nav-item">
             <a id="logoututton" class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>

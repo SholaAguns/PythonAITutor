@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="jumbotron" align="center">
+<div class="jumbotron selection_panel" align="center" id="getstarted_panel">
   <h1>Welcome {{ user.username}}</h1>
     <a href="{% url 'mytutor:user_request' pk=0  %}" role="button" class="btn btn-outline-secondary w-120">Get Started</a>
 </div>

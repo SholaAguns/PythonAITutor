@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <br>
  <div align="center" class="container" id="doc-form-wrapper">
-   <div class="jumbotron">
+   <div class="jumbotron selection_panel" id="request_selection_panel">
     <h2>What would like me to help you with?</h2>
     <button onclick="showInput('1')" class="btn btn-outline-secondary w-120">Create a study schedule</button>
-    <a href="{% url 'mytutor:user_request' pk=2  %}" role="button" class="btn btn-outline-secondary w-120">I NEED SOME MOTIVATION</a>
+     <button onclick="showInput('2')" class="btn btn-outline-secondary w-120">I NEED SOME MOTIVATION</button>
     <button onclick="showInput('3')" class="btn btn-outline-secondary w-120">Create a quiz</button>
    </div>
    <div align="center" class="container">
@@ -31,6 +31,8 @@
 
             if (pk === '1') {
                 input.placeholder = 'What subjects would you like to include?';
+            } else if (pk === '2') {
+                input.placeholder = 'Who would you like to hear it from?';
             } else if (pk === '3') {
                 input.placeholder = 'Sure, give me a topic';
             }
