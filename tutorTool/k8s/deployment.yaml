@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mytutorapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mytutorapp
+  template:
+    metadata:
+      labels:
+        app: mytutorapp
+    spec:
+      containers:
+      - name: mytutorapp
+        image: sholaaguns/mytutorapp:latest
+        ports:
+        - containerPort: 8000
