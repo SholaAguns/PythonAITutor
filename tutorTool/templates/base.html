@@ -43,7 +43,10 @@
             <a class="nav-link" href="{% url 'mytutor:requests' %}">My Requests</a>
             </li>
             <li class="nav-item">
-            <a id="logoututton" class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+              <form action="{% url 'accounts:logout' %}" method="post">
+                  {% csrf_token %}
+                  <button class="nav-link" type="submit">Logout</button>
+              </form>
             </li>
             {% else %}
             <li class="nav-item">
